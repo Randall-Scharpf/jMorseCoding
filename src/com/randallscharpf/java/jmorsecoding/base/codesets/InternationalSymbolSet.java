@@ -33,7 +33,7 @@ public final class InternationalSymbolSet extends SymbolSetBase {
         LETTER_C('c', DASH, DOT, DASH, DOT),
         LETTER_D('d', DASH, DOT, DOT),
         LETTER_E('e', DOT),
-        SPECIAL_LETTER_E_ACCENT('é', DOT, DOT, DASH, DOT, DOT),
+        SPECIAL_LETTER_E_ACCENT('\u00E9', DOT, DOT, DASH, DOT, DOT),
         LETTER_F('f', DOT, DOT, DASH, DOT),
         LETTER_G('g', DASH, DASH, DOT),
         LETTER_H('h', DOT, DOT, DOT, DOT),

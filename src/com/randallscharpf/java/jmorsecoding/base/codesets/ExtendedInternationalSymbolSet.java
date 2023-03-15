@@ -5,7 +5,7 @@ import com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType;
 import static com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType.DASH;
 import static com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType.DOT;
 import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
-import com.randallscharpf.java.jmorsecoding.base.standards.MorseStandard;
+import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
 import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,7 +144,7 @@ public final class ExtendedInternationalSymbolSet extends SymbolSetBase {
         }
         
         @Override
-        public void play(OnOff stateSetter, Delayer delayer, MorseStandard standard) throws Exception {
+        public void play(OnOff stateSetter, Delayer delayer, MorseTiming standard) throws Exception {
             for (Element e : elements) {
                 e.play(stateSetter, delayer, standard);
             }

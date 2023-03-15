@@ -8,7 +8,7 @@ package com.randallscharpf.java.jmorsecoding.base.codesets;
 import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
 import com.randallscharpf.java.jmorsecoding.base.morseunits.Element;
 import com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType;
-import com.randallscharpf.java.jmorsecoding.base.standards.MorseStandard;
+import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
 import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +131,7 @@ public final class InternationalSymbolSet extends SymbolSetBase {
         }
         
         @Override
-        public void play(OnOff stateSetter, Delayer delayer, MorseStandard standard) throws Exception {
+        public void play(OnOff stateSetter, Delayer delayer, MorseTiming standard) throws Exception {
             for (Element e : elements) {
                 e.play(stateSetter, delayer, standard);
             }

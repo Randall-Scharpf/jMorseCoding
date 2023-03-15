@@ -31,10 +31,10 @@ public class MorsePlayer {
     // be checked. Alternatively, directly calling the characters and playing them individually is far less prone
     // to errors in morse convention (albeit at the cost of more potential for programming errors).
     public void playMorseFromString(String message) throws Exception {
-        morseStandard.getSymbolSpecification().getPlayableForString(message).play(stateSetter, delayer, morseStandard);
+        morseStandard.getSymbolSpecification().getPlayableForString(message).play(stateSetter, delayer, morseStandard.getTimingSpecification());
     }
     
     public void playProsign(String prosign) throws Exception {
-        morseStandard.getSymbolSpecification().getPlayableForProsign(prosign).play(stateSetter, delayer, morseStandard);
+        morseStandard.getSymbolSpecification().getPlayableForProsign(prosign).play(stateSetter, delayer, morseStandard.getTimingSpecification());
     }
 }

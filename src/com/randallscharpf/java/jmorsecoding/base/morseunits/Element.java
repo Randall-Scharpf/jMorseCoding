@@ -6,8 +6,8 @@
 package com.randallscharpf.java.jmorsecoding.base.morseunits;
 
 import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
-import com.randallscharpf.java.jmorsecoding.base.standards.MorseStandard;
 import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
+import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
 
 public class Element implements PlayableMorseUnit {
     
@@ -18,10 +18,10 @@ public class Element implements PlayableMorseUnit {
     }
 
     @Override
-    public void play(OnOff stateSetter, Delayer delayer, MorseStandard morseStandard) throws Exception {
+    public void play(OnOff stateSetter, Delayer delayer, MorseTiming morseStandard) throws Exception {
         stateSetter.setActive(type.activeDuringPlay);
         delayer.wait(
-                morseStandard.getTimingSpecification().timeForElementType(type)
+                morseStandard.timeForElementType(type)
         );
     }
     

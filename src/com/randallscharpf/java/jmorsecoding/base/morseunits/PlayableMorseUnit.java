@@ -6,9 +6,9 @@
 package com.randallscharpf.java.jmorsecoding.base.morseunits;
 
 import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
-import com.randallscharpf.java.jmorsecoding.base.standards.MorseStandard;
+import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
 import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
 
 public interface PlayableMorseUnit {
-    public void play(OnOff stateSetter, Delayer delayer, MorseStandard standard) throws Exception;
+    public void play(OnOff stateSetter, Delayer delayer, MorseTiming standard) throws Exception;
 }

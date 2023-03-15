@@ -23,7 +23,7 @@ public final class ExtendedInternationalSymbolSet extends SymbolSetBase {
     }
     
     public static enum ExtendedInternationalSymbol implements MorseSymbol {
-        LETTER_A('a', DASH, DOT),
+        LETTER_A('a', DOT, DASH),
         SPECIAL_LETTER_A_GRAVE('\u00E0', DOT, DASH, DASH, DOT, DASH),
         SPECIAL_LETTER_A_DOTS('\u00E4', DOT, DASH, DOT, DASH),
         SPECIAL_LETTER_A_CIRCLE('\u00E5', DOT, DASH, DASH, DOT, DASH),
@@ -132,15 +132,18 @@ public final class ExtendedInternationalSymbolSet extends SymbolSetBase {
         
         private ExtendedInternationalSymbol(CharOrProsign cop, ElementType... elementTypes) {
             this.cop = cop;
-            List<Element> elements = new ArrayList<>(elementTypes.length * 2 - 1);
-            elements.add(new Element(elementTypes[0]));
+            List<Element> elementsTmp = new ArrayList<>(elementTypes.length * 2 - 1);
+            elementsTmp.add(new Element(elementTypes[0]));
             for (int i = 1; i < elementTypes.length; i++) {
                 if (elementTypes[i].activeDuringPlay && elementTypes[i-1].activeDuringPlay) {
-                    elements.add(new Element(ElementType.ELEMENT_GAP));
+                    elementsTmp.add(new Element(ElementType.ELEMENT_GAP));
                 }
-                elements.add(new Element(elementTypes[i]));
+                elementsTmp.add(new Element(elementTypes[i]));
             }
-            this.elements = elements.toArray(new Element[0]);
+            if (!cop.isChar()) {
+                elementsTmp.add(new Element(ElementType.WORD_GAP));
+            }
+            this.elements = elementsTmp.toArray(new Element[0]);
         }
         
         @Override

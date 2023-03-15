@@ -28,7 +28,7 @@ public final class InternationalSymbolSet extends SymbolSetBase {
     }
     
     public enum InternationalSymbol implements MorseSymbol {
-        LETTER_A('a', DASH, DOT),
+        LETTER_A('a', DOT, DASH),
         LETTER_B('b', DASH, DOT, DOT, DOT),
         LETTER_C('c', DASH, DOT, DASH, DOT),
         LETTER_D('d', DASH, DOT, DOT),

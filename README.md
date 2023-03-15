@@ -55,7 +55,7 @@ Make sure you've tested the code you're submitting (and show evidence of this in
 Additionally, try to follow principles of good class design like interfacing and parametrization where appropriate, and minimal use of static fields.
 
 ### By adding documentation?
-If you're interested in adding documentation to existing code (or if you're looking fo guidelines for documenting code that you're adding), make sure to include the following.
+If you're interested in adding documentation to existing code (or if you're looking for guidelines for documenting code that you're adding), make sure to include the following.
  - For methods
    - the version in which the method last changed, under an `@version` tag
    - the version in which the method contract last changed (typically the version in which the method was first added), under an `@since` tag
@@ -66,14 +66,14 @@ If you're interested in adding documentation to existing code (or if you're look
    - if relevant, notes on the complexity of the implementation of the method
  - For fields
    - what the field contains, as a noun, and when / by what it should be needed
-   - specifics of what the possible error states or edge case values mean (e.g, if you have an object field, what does `null` mean?)
-   - the version in which the field contract last changed (typically the version in which the method was first added), under an `@since` tag
+   - specifics of what the possible error states or edge case values mean (e.g, if you have an Object field, what does `null` mean?)
+   - the version in which the field contract last changed (typically the version in which the field was first added), under an `@since` tag
  - For classes
    - a brief description of the what the class is or does
    - a brief description of how to use the class
    - if relevant, notes on the complexity of the implementation of the class
-   - the version in which the method last changed, under an `@version` tag
-   - the version in which the method contract last changed (typically the version in which the method was first added), under an `@since` tag
+   - the version in which the class last changed, under an `@version` tag
+   - the version in which the class contract last changed, under an `@since` tag
 
 ### By improving something else?
 If you want to fix something or add something, but it doesn't fall under the categories above, start by _searching the repository issues page_ and, only if you can't find a relevant one, create a new issue. It will be reviewed soon, and if I mark it as a desired fix, you can start working on it! Alterntively, if you think it's out of your abilities to make the fix, you can wait for someone who's looking for bugs (probably myself) to fix the issue.

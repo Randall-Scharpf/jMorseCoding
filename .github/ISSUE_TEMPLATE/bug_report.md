@@ -1,38 +1,9 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+_Write your content here_
 
----
-
-**Describe the bug**
-A clear and concise description of what the bug is.
-
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+__Checklist__ (Don't worry if you can't satisfy all of these, but try to satisfy _almost_ all of them. Also, delete this parenthetical before posing your issue: it'll clutter up your nice neat work.)
+ - [ ] I have checked that there are no other opened or closed issues covering this bug. And there are none.
+ - [ ] I included details about my system platform and my version of Java.
+ - [ ] I stated which extensions I'm using and where they are downloaded.
+ - [ ] I stated exactly how the bug was produced and reproduced.
+ - [ ] I described both the expected and actual behavior.
+ - [ ] I provided an error log.

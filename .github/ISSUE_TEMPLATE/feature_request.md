@@ -1,3 +1,11 @@
+---
+name: Feature Request
+about: Suggest something new
+title: ''
+labels: ''
+assignees: ''
+
+---
 _Write your content here_
 
 __Checklist__ (Don't worry if you can't satisfy all of these, but try to satisfy _almost_ all of them. Also, delete this parenthetical before posing your issue: it'll clutter up your nice neat work.)

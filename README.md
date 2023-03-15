@@ -35,7 +35,7 @@ _A Java library for converting text into Morse code and playing it back_
 ## Report a bug?
 First, check [the repository issues page](https://github.com/Randall-Scharpf/jMorseCoding/issues) to see if someone else has already discovered the same bug.
 If you find the issue, see if there's already a fix or if there's a fix in progress. If there is no fix, post a like on the issue ticket.
-If you can't find a matching issue, post a new issue on the. Make sure to include
+If you can't find a matching issue, post a new issue. Make sure to include...
  - Which extensions you have downloaded and where you have them downloaded
  - What platform you're using
  - Exactly what you were doing / trying to do when the bug occurred
@@ -115,7 +115,7 @@ If you are submitting code,
 _To ask a new question, create a pull request adding it. If it's a good question, expect your question to be merged in, with an answer!_
  - When is Java 17 support coming?  
  Soon! I'm waiting for the rest of the tools in my build environment to support it.
- - What licences are used by this software? What does that mean?
+ - What licenses are used by this software? What does that mean?
  The base library is released under [The MIT License](https://choosealicense.com/licenses/mit/). Official extensions are likely to use the same or similar license, but you must check their documentation before making any assumptions. Third-party extensions might be under any license; their docs are the only place where you can learn about them.
 
 # List of Extensions

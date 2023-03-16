@@ -178,7 +178,6 @@ public class SymbolSetTest extends TestCase {
             }, ((time) -> {
                 b.append("Wait " + time + "\n");
             }), new FarnsworthTiming(20, 40));
-            System.err.println(set.getClass() + ": " + b);
             assertEquals(
                     "true\nWait PT0.09S\n" +
                     "false\nWait PT0.03S\n" +

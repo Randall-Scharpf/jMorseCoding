@@ -90,8 +90,8 @@ public abstract class SymbolSetBase implements MorseSymbolSet {
         }
         if (c != cacheEnumClass) {
             cacheEnumClass = c;
-            cachedResult1 = null;
             cachedResult2 = null;
+            cachedResult3 = null;
         }
         return cachedResult1;
     }
@@ -99,7 +99,7 @@ public abstract class SymbolSetBase implements MorseSymbolSet {
     @Override
     public PlayableMorseUnit getPlayableForProsign(String prosignName) {
         Class<? extends Enum<? extends MorseSymbol>> c = getSymbolEnumClass();
-        if (c == cacheEnumClass && cachedResult1 != null) {
+        if (c == cacheEnumClass && cachedResult2 != null) {
             return cachedResult2.get(standardizeString(prosignName));
         }
         cachedResult2 = new HashMap<>();
@@ -112,7 +112,7 @@ public abstract class SymbolSetBase implements MorseSymbolSet {
         if (c != cacheEnumClass) {
             cacheEnumClass = c;
             cachedResult1 = null;
-            cachedResult2 = null;
+            cachedResult3 = null;
         }
         PlayableMorseUnit p = cachedResult2.get(standardizeString(prosignName));
         if (p == null) {
@@ -125,7 +125,7 @@ public abstract class SymbolSetBase implements MorseSymbolSet {
     @Override
     public PlayableMorseUnit getPlayableForString(String str) {
         Class<? extends Enum<? extends MorseSymbol>> c = getSymbolEnumClass();
-        if (c == cacheEnumClass && cachedResult1 != null) {
+        if (c == cacheEnumClass && cachedResult3 != null) {
             return buildStringFromChars(cachedResult3, str);
         }
         cachedResult3 = new HashMap<>();

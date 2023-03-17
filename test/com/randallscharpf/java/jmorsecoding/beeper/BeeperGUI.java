@@ -12,6 +12,7 @@ import com.randallscharpf.java.jmorsecoding.base.standards.MorseStandard;
 import com.randallscharpf.java.jmorsecoding.base.timings.FarnsworthTiming;
 import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
 import com.randallscharpf.java.jmorsecoding.base.timings.StandardTiming;
+import com.randallscharpf.java.jmorsecoding.beeper.Beeper;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sound.sampled.LineUnavailableException;
@@ -309,6 +310,7 @@ public class BeeperGUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(BeeperGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

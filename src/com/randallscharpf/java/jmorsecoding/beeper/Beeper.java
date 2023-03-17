@@ -1,12 +1,31 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * The MIT License
+ *
+ * Copyright 2021 Randall.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package com.randallscharpf.java.jmorsecoding.beeper;
 
 import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
 import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
-import java.io.Closeable;
+import com.randallscharpf.java.jmorsecoding.base.standards.Openable;
 import java.time.Duration;
 import java.util.function.IntSupplier;
 import java.util.function.Supplier;
@@ -15,26 +34,26 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
-/**
- *
- * @author Randall
- */
-public class Beeper implements OnOff, Delayer, Closeable {
+public class Beeper implements OnOff, Delayer, Openable {
     
     private final IntSupplier pitch;
     private final IntSupplier volume;
     private final Supplier<WaveType> waveform;
 
+    public Beeper(Supplier<WaveType> waveform) throws LineUnavailableException {
+        this(() -> 440, waveform);
+    }
+    
     public Beeper(IntSupplier pitch, Supplier<WaveType> waveform) throws LineUnavailableException {
         this(pitch, () -> 100, waveform);
     }
     
-    public Beeper(Supplier<WaveType> waveform) throws LineUnavailableException {
-        this(() -> 440, () -> 100, waveform);
+    public Beeper(IntSupplier pitch) throws LineUnavailableException {
+        this(pitch, () -> WaveType.TRIANGLE);
     }
     
-    public Beeper(IntSupplier pitch) throws LineUnavailableException {
-        this(pitch, () -> 100, () -> WaveType.TRIANGLE);
+    public Beeper() throws LineUnavailableException {
+        this(() -> WaveType.TRIANGLE);
     }
     
     public Beeper(IntSupplier pitch, IntSupplier volume, Supplier<WaveType> waveform) throws LineUnavailableException {
@@ -89,7 +108,9 @@ public class Beeper implements OnOff, Delayer, Closeable {
     private volatile WaveType playingWaveType = null;
     private volatile boolean audioManagerMayRun;
     
-    public void open() throws LineUnavailableException {
+    @Override
+    public synchronized void open() throws LineUnavailableException {
+        if (audioManagerMayRun) return;
         line.open(format,2200); // 25ms of buffer
         line.start();
         audioManagerMayRun = true;
@@ -139,7 +160,8 @@ public class Beeper implements OnOff, Delayer, Closeable {
     }
     
     @Override
-    public void close() {
+    public synchronized void close() {
+        if (!audioManagerMayRun) return;
         audioManagerMayRun = false;
         line.stop();
         line.close();

@@ -102,6 +102,9 @@ If you are submitting code,
    - This does not imply that there is any warranty on any of the code in this repository.
    - If you discover a security issue in any of the code in this library, you are encouraged to submit an issue as soon as possible.
    - If you find that any third-party plugin below is unsafe, you are also encouraged to submit an issue as soon as possible.
+ - Help out your users! Build the latest version of the extension into a jar file. Additionally, if your extension is intended to provide a new output through which users can play their Morse code and it implements the `OnOff` and `Delayer` interfaces in some single class with a default constructor or a pair of classes with default constructors, [you can let users test out your extension without code](https://github.com/Randall-Scharpf/jMorseCoding#play-morse-code-without-writing-any-java-code)!
+   - Set the manifest attributes `OnOff-Class` and `Delayer-Class` to the relevant classes' fully qualified names, and set the manifest attribute `Extension-Name` to something descriptive for the user.
+   - If either (or both) of your `OnOff` and `Delayer` implemenations use external resources, have them implement `Openable` so that those resources can be handled appropriately by user code, without requiring creation of new `OnOff` and `Delayer` objects to reopen closed resources.
  - Watch for responses on your pull request asking for clarifications... or accepting your extension onto the list!
 
 # What You Can Expect from Future Versions

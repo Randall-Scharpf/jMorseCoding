@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2021 Randall.
+ * Copyright (c) 2023 Randall Scharpf
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.randallscharpf.java.jmorsecoding.gui;
+package com.randallscharpf.java.jmorsecoding.base.playerinterfaces;
 
-public class JarLoadTest {
-    
+/**
+ * Something that can be turned on and off. Expected to have a visible effect resulting
+ * in state transition between two predetermined and distinguishable states. Used
+ * to produce Morse Code by setting the state to "on" when and only when a dot or
+ * a dash is being played.
+ * @since 1.0
+ */
+@FunctionalInterface
+public interface OnOff {
+    /**
+     * Sets the state of the device. The active state is the state referred to as
+     * "on" and the inactive state is the state referred to as "off".
+     * @since 1.0
+     * @param active true if and only if the device should be in the "on" state
+     * @throws Exception if the change of state is unable to be enacted
+     */
+    public void setActive(boolean active) throws Exception;
 }

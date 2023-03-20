@@ -1,15 +1,33 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The MIT License
+ *
+ * Copyright (c) 2023 Randall Scharpf
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
-package com.randallscharpf.java.jmorsecoding.base.codesets;
+package com.randallscharpf.java.jmorsecoding.base.symbolsets;
 
-import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
+import com.randallscharpf.java.jmorsecoding.base.playerinterfaces.Delayer;
 import com.randallscharpf.java.jmorsecoding.base.morseunits.Element;
 import com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType;
 import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
-import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
+import com.randallscharpf.java.jmorsecoding.base.playerinterfaces.OnOff;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +35,34 @@ import static com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType.D
 import static com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType.DOT;
 
 /**
- * Follows the conventions established by ITU-R 2009 standards.
- * https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf
+ * A symbol set that follows the conventions established by ITU-R 2009 standards. See
+ * <a href="https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf">
+ * https://www.itu.int/dms_pubrec/itu-r/rec/m/R-REC-M.1677-1-200910-I!!PDF-E.pdf</a>
  */
 public final class InternationalSymbolSet extends SymbolSetBase {
-
+    
+    /**
+     * Creates a symbol set using standard international Morse Code. Uses the ITU-R
+     * 2009 standards document to translate characters and prosigns to dots, dashes,
+     * and gaps.
+     * @version 1.0
+     * @since 1.0
+     */
+    public InternationalSymbolSet() {
+        // no functionality required, simply for documentation
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @version 1.0
+     * @since 1.0
+     */
     @Override
-    public Class<? extends Enum<? extends MorseSymbol>> getSymbolEnumClass() {
+    protected Class<? extends Enum<? extends MorseSymbol>> getSymbolEnumClass() {
         return InternationalSymbol.class;
     }
     
-    public enum InternationalSymbol implements MorseSymbol {
+    /* package-private */ enum InternationalSymbol implements MorseSymbol {
         LETTER_A('a', DOT, DASH),
         LETTER_B('b', DASH, DOT, DOT, DOT),
         LETTER_C('c', DASH, DOT, DASH, DOT),
@@ -130,6 +165,11 @@ public final class InternationalSymbolSet extends SymbolSetBase {
             this.elements = elementsTmp.toArray(new Element[0]);
         }
         
+        /**
+         * {@inheritDoc}
+         * @version 1.0
+         * @since 1.0
+         */
         @Override
         public void play(OnOff stateSetter, Delayer delayer, MorseTiming standard) throws Exception {
             for (Element e : elements) {
@@ -137,6 +177,11 @@ public final class InternationalSymbolSet extends SymbolSetBase {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         * @version 1.0
+         * @since 1.0
+         */
         @Override
         public CharOrProsign getCharOrProsign() {
             return cop;

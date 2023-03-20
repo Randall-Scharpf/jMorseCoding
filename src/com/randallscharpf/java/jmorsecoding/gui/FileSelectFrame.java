@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2021 Randall.
+ * Copyright (c) 2023 Randall Scharpf
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,10 +28,21 @@ import java.io.File;
 import java.util.function.Consumer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Interactively chooses and returns a file from the user's drive. First, a frame
+ * must be instantiated, preparing it for use. Then, {@link #getFile(java.util.function.Consumer)}
+ * can be called, utilizing the created selection interface.
+ * @version 1.0
+ * @since 1.0
+ */
 public class FileSelectFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form FileSelectFrame
+     * Creates a new <code>FileSelectFrame</code> centered around the supplied parent.
+     * The frame is built and prepared, but not made visible.
+     * @version 1.0
+     * @since 1.0
+     * @param parent a component with respect to which this component should begin centered
      */
     public FileSelectFrame(Component parent) {
         initComponents();
@@ -49,7 +60,7 @@ public class FileSelectFrame extends javax.swing.JFrame {
 
         jFileChooser1 = new javax.swing.JFileChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Find an Extension to Sample");
 
         jFileChooser1.setDialogTitle("");
@@ -81,11 +92,31 @@ public class FileSelectFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        setVisible(false);
-        callback.accept(jFileChooser1.getSelectedFile());
+        dispose();
+        callback.accept(evt.getActionCommand().equals("ApproveSelection") ? jFileChooser1.getSelectedFile() : null);
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
+    /**
+     * Show the frame, and set the callback to be used when a file is selected. If
+     * selection is cancelled or the window is closed prematurely, the callback is
+     * answered with <code>null</code>. When the callback is called (either with a
+     * valid <code>File</code> or <code>null</code>), this frame is hidden and
+     * disposed of, so it cannot be reused. This method may not be called more than
+     * once per instance.
+     * @version 1.0
+     * @since 1.0
+     * @param callback a function to be called when a file is selected
+     * @throws IllegalStateException if the method has already been called
+     */
     public void getFile(Consumer<File> callback) {
+        boolean b;
+        synchronized (getFileLock) {
+            b = getFileCalled;
+            getFileCalled = true;
+        }
+        if (b) {
+            throw new IllegalStateException("getFile has already been called on this frame!");
+        }
         setVisible(true);
         this.callback = callback;
     }
@@ -94,4 +125,6 @@ public class FileSelectFrame extends javax.swing.JFrame {
     private javax.swing.JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables
     private Consumer<File> callback;
+    private final Object getFileLock = new Object();
+    private boolean getFileCalled = false;
 }

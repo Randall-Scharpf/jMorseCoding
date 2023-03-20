@@ -15,7 +15,9 @@ _A Java library for converting text into Morse code and playing it back_
 
 ## Use the library in my code?
  - Go to [Releases](https://github.com/Randall-Scharpf/jMorseCoding/releases).
- - If you are on Java 11 or higher...
+ - If you are on Java 17 or higher...
+   - download the latest version of `jMorseCoding-base-j17.jar`
+ - If you are on Java 11 through 16...
    - download the latest version of `jMorseCoding-base-j11.jar`
  - If you are on Java 8 through 10...
    - download the latest version of `jMorseCoding-base-j8.jar`).
@@ -57,13 +59,13 @@ Additionally, try to follow principles of good class design like interfacing and
 ### By adding documentation?
 If you're interested in adding documentation to existing code (or if you're looking for guidelines for documenting code that you're adding), make sure to include the following.
  - For methods
-   - the version in which the method last changed, under an `@version` tag
-   - the version in which the method contract last changed (typically the version in which the method was first added), under an `@since` tag
    - all parameters described briefly as nouns under `@param` tags
    - the return value described briefly as a noun under an `return` tags
    - a period-terminated first sentence that is a grammatical predicate describing what the method does as a verb
    - details of how the method behaves under edge-case parameters
    - if relevant, notes on the complexity of the implementation of the method
+   - the version in which the method last changed, under an `@version` tag, if the method is not abstract
+   - the version in which the method contract last changed (typically the version in which the method was first added), under an `@since` tag
  - For fields
    - what the field contains, as a noun, and when / by what it should be needed
    - specifics of what the possible error states or edge case values mean (e.g, if you have an Object field, what does `null` mean?)
@@ -116,17 +118,17 @@ If you are submitting code,
 
 # FAQ
 _To ask a new question, create a pull request adding it. If it's a good question, expect your question to be merged in, with an answer!_
- - When is Java 17 support coming?  
- Soon! I'm waiting for the rest of the tools in my build environment to support it.
+ <!-- - When is Java 21 support coming?
+ Soon! I'm waiting for the rest of the tools in my build environment to support it. -->
  - What licenses are used by this software? What does that mean?
  The base library is released under [The MIT License](https://choosealicense.com/licenses/mit/). Official extensions are likely to use the same or similar license, but you must check their documentation before making any assumptions. Third-party extensions might be under any license; their docs are the only place where you can learn about them.
 
 # List of Extensions
 
 ## Official extensions
- - [Beeper](docs) — provides support for playing Morse Code as beeps through the Java Runtime Environment
- - [Beeper Mobile](docs) — provides support for playing Morse Code as beeps through the Android RunTime
- - [Blinker Mobile](docs) — provides support for playing Morse Code as blinks on a device flashlight through the Android RunTime
+ - [Beeper](https://github.com/Randall-Scharpf/jMorseCoding/tree/main/src/com/randallscharpf/java/jmorsecoding/beeper) — provides support for playing Morse Code as beeps through the Java Runtime Environment
+ - [Beeper Mobile (WIP)](https://java.randallscharpf.com/jMorseCoding/beeper-mobile.html) — provides support for playing Morse Code as beeps through the Android RunTime
+ - [Blinker Mobile (WIP)](https://java.randallscharpf.com/jMorseCoding/blinker-mobile.html) — provides support for playing Morse Code as blinks on a device flashlight through the Android RunTime
 
 ## Third-Party extensions
  - Nothing here yet... check back later!

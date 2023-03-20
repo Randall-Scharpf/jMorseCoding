@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2021 Randall.
+ * Copyright (c) 2023 Randall Scharpf
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,13 @@
 package com.randallscharpf.java.jmorsecoding.gui;
 
 import com.randallscharpf.java.jmorsecoding.base.MorsePlayer;
-import com.randallscharpf.java.jmorsecoding.base.codesets.ExtendedInternationalSymbolSet;
-import com.randallscharpf.java.jmorsecoding.base.codesets.InternationalSymbolSet;
-import com.randallscharpf.java.jmorsecoding.base.codesets.MorseSymbolSet;
-import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
+import com.randallscharpf.java.jmorsecoding.base.symbolsets.ExtendedInternationalSymbolSet;
+import com.randallscharpf.java.jmorsecoding.base.symbolsets.InternationalSymbolSet;
+import com.randallscharpf.java.jmorsecoding.base.symbolsets.MorseSymbolSet;
+import com.randallscharpf.java.jmorsecoding.base.playerinterfaces.Delayer;
 import com.randallscharpf.java.jmorsecoding.base.standards.MorseStandard;
-import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
-import com.randallscharpf.java.jmorsecoding.base.standards.Openable;
+import com.randallscharpf.java.jmorsecoding.base.playerinterfaces.OnOff;
+import com.randallscharpf.java.jmorsecoding.base.playerinterfaces.Openable;
 import com.randallscharpf.java.jmorsecoding.base.timings.FarnsworthTiming;
 import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
 import com.randallscharpf.java.jmorsecoding.base.timings.StandardTiming;
@@ -39,12 +39,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.sound.sampled.LineUnavailableException;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * The main GUI used to play Morse Code. Includes options to set timing parameters,
+ * choose symbol sets, and select extensions for use as physical Morse production
+ * layers. 
+ * @version 1.0
+ * @since 1.0
+ */
 public class SamplerGUI extends javax.swing.JFrame {
 
-    public SamplerGUI() throws LineUnavailableException {
+    /**
+     * Creates a GUI to play Morse Code with dynamic extension choice.
+     */
+    public SamplerGUI() {
         symbolSetMap = new HashMap<>();
         initComponents();
     }
@@ -308,22 +317,30 @@ public class SamplerGUI extends javax.swing.JFrame {
     private final String[] extAdditionLock = new String[0];
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         new FileSelectFrame(this).getFile((file) -> {
-            synchronized (extAdditionLock) {
+            if (file == null) return; // file selection was cancelled by the user
                 try {
-                    JarLoader j = new JarLoader(file);
-                    playerNames.add(j.extName);
-                    players.add(new MorsePlayer(j.onOff, j.delayer, morseStandard));
-                    activationHandlers.add(j.onOff);
-                    waitHandlers.add(j.delayer);
-                    jComboBox2.setModel(new DefaultComboBoxModel<>(playerNames.toArray(extAdditionLock)));
-                    jComboBox2.setSelectedIndex(playerNames.size()-1);
+                    LoadedExtension j = new LoadedExtension(file);
+                    synchronized (extAdditionLock) {
+                        playerNames.add(j.extName);
+                        players.add(new MorsePlayer(j.onOff, j.delayer, morseStandard));
+                        activationHandlers.add(j.onOff);
+                        waitHandlers.add(j.delayer);
+                        jComboBox2.setModel(new DefaultComboBoxModel<>(playerNames.toArray(extAdditionLock)));
+                        jComboBox2.setSelectedIndex(playerNames.size()-1);
+                    }
                 } catch (IOException | ReflectiveOperationException ex) {
                     reportException(ex);
                 }
-            }
         });
     }//GEN-LAST:event_jButton3ActionPerformed
     
+    /**
+     * Starts a GUI that can be used to test extensions and play Morse Code. Sets
+     * the look and feel of the GUI to <code>Nimbus</code>, if it is available.
+     * @version 1.0
+     * @since 1.0
+     * @param args is ignored
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -347,22 +364,25 @@ public class SamplerGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(SamplerGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
-        try {
-            SamplerGUI beeper = new SamplerGUI();
-            java.awt.EventQueue.invokeLater(() -> {
-                beeper.setVisible(true);
-            });
-        } catch (LineUnavailableException ex) {
-            System.err.println("Could not open audio device: " + ex.getMessage());
-        }
+        SamplerGUI sampler = new SamplerGUI();
+        java.awt.EventQueue.invokeLater(() -> {
+            sampler.setVisible(true);
+        });
     }
     
     private final Map<String, MorseSymbolSet> symbolSetMap;
+    
+    /**
+     * Maps readable names of all known symbol sets to instances of the symbol sets.
+     * This method is used to setup a <code>JComboBox</code> that allows selection
+     * of the desired symbol set at runtime, and users who have additional symbol
+     * sets can override this method to add their new sets to the interface.
+     * @version 1.0
+     * @since 1.0
+     * @return a map of symbol set names to symbol set instances
+     */
     protected Map<String, MorseSymbolSet> getAvailableStandards() {
         if (symbolSetMap.isEmpty()) {
             symbolSetMap.put("Extended Int'l", new ExtendedInternationalSymbolSet());

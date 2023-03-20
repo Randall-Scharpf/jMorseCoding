@@ -23,17 +23,14 @@
  */
 package com.randallscharpf.java.jmorsecoding.base;
 
-import com.randallscharpf.java.jmorsecoding.base.codesets.ExtendedInternationalSymbolSet;
-import com.randallscharpf.java.jmorsecoding.base.codesets.InternationalSymbolSet;
-import com.randallscharpf.java.jmorsecoding.base.codesets.MorseSymbolSet;
-import com.randallscharpf.java.jmorsecoding.base.codesets.SymbolSetBase;
+import com.randallscharpf.java.jmorsecoding.base.symbolsets.ExtendedInternationalSymbolSet;
+import com.randallscharpf.java.jmorsecoding.base.symbolsets.InternationalSymbolSet;
+import com.randallscharpf.java.jmorsecoding.base.symbolsets.MorseSymbolSet;
+import com.randallscharpf.java.jmorsecoding.base.symbolsets.SymbolSetBase;
 import com.randallscharpf.java.jmorsecoding.base.timings.FarnsworthTiming;
 import junit.framework.TestCase;
 
-/**
- *
- * @author Randall
- */
+// Tests built-in symbol sets
 public class SymbolSetTest extends TestCase {
 
     public SymbolSetTest(String testName) {

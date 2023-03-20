@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2021 Randall.
+ * Copyright (c) 2023 Randall Scharpf
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,9 @@ import java.time.Duration;
 
 import junit.framework.TestCase;
 
-/**
- * Uses PARIS as standard word, since it is intended for natural language, while
- * the alternative (CODEX) is intended for random language.
- */
+// Tests WPM values and element duration ratios on built-in timings
+// Uses PARIS as standard word, since it is intended for natural language, while
+// the alternative CODEX is intended for random language.
 public class TimingTest extends TestCase {
     
     public TimingTest(String testName) {

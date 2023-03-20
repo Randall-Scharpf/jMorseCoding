@@ -21,54 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.randallscharpf.java.jmorsecoding.base.morseunits;
+package com.randallscharpf.java.jmorsecoding.base.playerinterfaces;
 
 /**
- * A state and a relative duration within a specification for timing.
- * @version 1.0
+ * Represents a physical resource that can be opened and closed. If an class representing
+ * a physical layer that produces Morse Code requires resources, that class should
+ * implement this interface to signify to handlers that resource management is required.
  * @since 1.0
  */
-public enum ElementType {
+public interface Openable {
     /**
-     * A minimum-length unit of Morse Code with "on" state.
-     * @version 1.0
+     * Acquires the resource for use. Allocates any required internal structures,
+     * performs configuration, and acquires any locks or system assets mandatory
+     * for resource use.
      * @since 1.0
+     * @throws Exception if there is an issue opening the resource
      */
-    DOT(true),
+    public void open() throws Exception;
     /**
-     * A medium-length unit of Morse Code with "on" state.
-     * @version 1.0
+     * Releases the resource. Deallocates any required internal structures and releases
+     * any locks or system assets mandatory for resource use.
      * @since 1.0
+     * @throws Exception if there is an issue closing the resource
      */
-    DASH(true),
-    /**
-     * A minimum-length unit of Morse Code with "off" state.
-     * @version 1.0
-     * @since 1.0
-     */
-    ELEMENT_GAP(false),
-    /**
-     * A medium-length unit of Morse Code with "off" state.
-     * @version 1.0
-     * @since 1.0
-     */
-    LETTER_GAP(false),
-    /**
-     * A maximum-length unit of Morse Code with "off" state.
-     * @version 1.0
-     * @since 1.0
-     */
-    WORD_GAP(false);
-    /**
-     * The state of the instance. A <code>true</code> is present here if an element
-     * type of this instance is played in the "on" state and a <code>false</code>
-     * is present here if an element type of this instance is played in the "off"
-     * state.
-     * @version 1.0
-     * @since 1.0
-     */
-    public final boolean activeDuringPlay;
-    private ElementType(boolean on) {
-        this.activeDuringPlay = on;
-    }
+    public void close() throws Exception;
 }

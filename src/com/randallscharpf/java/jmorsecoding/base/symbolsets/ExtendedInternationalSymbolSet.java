@@ -1,28 +1,70 @@
-package com.randallscharpf.java.jmorsecoding.base.codesets;
+/*
+ * The MIT License
+ *
+ * Copyright (c) 2023 Randall Scharpf
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package com.randallscharpf.java.jmorsecoding.base.symbolsets;
 
 import com.randallscharpf.java.jmorsecoding.base.morseunits.Element;
 import com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType;
 import static com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType.DASH;
 import static com.randallscharpf.java.jmorsecoding.base.morseunits.ElementType.DOT;
-import com.randallscharpf.java.jmorsecoding.base.standards.Delayer;
+import com.randallscharpf.java.jmorsecoding.base.playerinterfaces.Delayer;
 import com.randallscharpf.java.jmorsecoding.base.timings.MorseTiming;
-import com.randallscharpf.java.jmorsecoding.base.standards.OnOff;
+import com.randallscharpf.java.jmorsecoding.base.playerinterfaces.OnOff;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Attempts to be able to convert any valid Unicode string to the Morse code sequence
- * that corresponds to that string according to general consensus. General consensus
- * is not a formal standard, but it can be and is here a goal nonetheless.
+ * A symbol set that attempts to be able to convert any valid Unicode string to the
+ * Morse code sequence that corresponds to that string according to general consensus.
+ * General consensus is not a formal standard, but it can be a goal nonetheless, and
+ * so it is the goal of this implementation. Some characters and prosigns, therefore,
+ * may be misinterpreted by some in their Morse translations, but this is considered
+ * a superior choice to the choice of no translation at all.
+ * @version 1.0
+ * @since 1.0
  */
 public final class ExtendedInternationalSymbolSet extends SymbolSetBase {
 
+    /**
+     * Creates a symbol set using international Morse Code with non-standard extensions.
+     * @version 1.0
+     * @since 1.0
+     */
+    public ExtendedInternationalSymbolSet() {
+        // no functionality required, simply for documentation
+    }
+
+    /**
+     * {@inheritDoc}
+     * @version 1.0
+     * @since 1.0
+     */
     @Override
-    public Class<? extends Enum<? extends MorseSymbol>> getSymbolEnumClass() {
+    protected Class<? extends Enum<? extends MorseSymbol>> getSymbolEnumClass() {
         return ExtendedInternationalSymbol.class;
     }
     
-    public static enum ExtendedInternationalSymbol implements MorseSymbol {
+    /* package-private */ static enum ExtendedInternationalSymbol implements MorseSymbol {
         LETTER_A('a', DOT, DASH),
         SPECIAL_LETTER_A_GRAVE('\u00E0', DOT, DASH, DASH, DOT, DASH),
         SPECIAL_LETTER_A_DOTS('\u00E4', DOT, DASH, DOT, DASH),
@@ -146,6 +188,11 @@ public final class ExtendedInternationalSymbolSet extends SymbolSetBase {
             this.elements = elementsTmp.toArray(new Element[0]);
         }
         
+        /**
+         * {@inheritDoc}
+         * @version 1.0
+         * @since 1.0
+         */
         @Override
         public void play(OnOff stateSetter, Delayer delayer, MorseTiming standard) throws Exception {
             for (Element e : elements) {
@@ -153,6 +200,11 @@ public final class ExtendedInternationalSymbolSet extends SymbolSetBase {
             }
         }
 
+        /**
+         * {@inheritDoc}
+         * @version 1.0
+         * @since 1.0
+         */
         @Override
         public CharOrProsign getCharOrProsign() {
             return cop;

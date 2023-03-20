@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2021 Randall.
+ * Copyright (c) 2023 Randall Scharpf
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.randallscharpf.java.jmorsecoding.base.standards;
+package com.randallscharpf.java.jmorsecoding.base.playerinterfaces;
 
-public interface Openable {
-    public void open() throws Exception;
-    public void close() throws Exception;
+import java.time.Duration;
+
+/**
+ * A means of waiting. In some contexts, spinning or sleeping the current thread
+ * is an appropriate choice; in other contexts, it makes more sense to merely indicate
+ * to a scheduler or device the required timing. Implementations may choose to use
+ * the most situationally efficient code, the most situationally accurate code, or
+ * some tradeoff between these potential extremes.
+ * @since 1.0
+ */
+@FunctionalInterface
+public interface Delayer {
+    /**
+     * Waits for some amount of time. This method may block until the waiting is
+     * completed or indicate to some other thread or some device that the waiting
+     * should occur and then return immediately.
+     * @since 1.0
+     * @param time a <code>Duration</code> giving the amount of time to wait
+     * @throws Exception if the waiting is unable to be demanded or completed
+     */
+    public void wait(Duration time) throws Exception;
 }
